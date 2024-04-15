@@ -14,3 +14,5 @@
 * run `make d-lint` to lint code in container
 * run `make d-test` to run tests in container
 
+
+https://medium.com/@arthurapp98/using-sqlalchemy-to-create-and-populate-a-postgresql-database-with-excel-data-eb6049d93402
