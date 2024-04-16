@@ -1,5 +1,3 @@
-SHELL := /bin/bash
-
 # Local development with venv
 
 venv::
@@ -46,3 +44,11 @@ d-lint::
 d-test::
 	docker-compose exec anaconda python -m unittest discover tests
 .PHONY: d-lint
+
+
+###########################
+pop::
+	python src/populate_db.py
+
+d-pop::
+	docker-compose exec anaconda python src/populate_db.py
