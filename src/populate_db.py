@@ -17,26 +17,26 @@ db_port = getenv('DB_PORT')
 URL = f"postgresql+psycopg2://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}"
 
 
-def create_db() -> None:
+def create_db(url: str) -> None:
     """create new db, drop if exists"""
-    engine = create_engine(URL)
+    engine = create_engine(url)
     if database_exists(engine.url):
         drop_database(engine.url)
 
     create_database(engine.url)
 
 
-def create_schema() -> None:
+def create_schema(url: str) -> None:
     """create tables"""
-    engine = create_engine(URL)
+    engine = create_engine(url)
     Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
 
 
-def endpoint_users() -> None:
+def endpoint_users(url: str) -> None:
     """Handling user endpoints"""
     result = rq.get("https://jsonplaceholder.typicode.com/users", timeout=2)
-    engine = create_engine(URL)
+    engine = create_engine(url)
     data = []
     for user in result.json():
         obj_user = User(
@@ -69,10 +69,10 @@ def endpoint_users() -> None:
         session.commit()
 
 
-def endpoint_posts() -> None:
+def endpoint_posts(url: str) -> None:
     """Handling posts endpoints"""
     result = rq.get("https://jsonplaceholder.typicode.com/posts", timeout=2)
-    engine = create_engine(URL)
+    engine = create_engine(url)
     data = []
     for post in result.json():
         obj_posts = Post(
@@ -88,10 +88,10 @@ def endpoint_posts() -> None:
         session.commit()
 
 
-def endpoint_comments() -> None:
+def endpoint_comments(url: str) -> None:
     """Handling comments endpoints"""
     result = rq.get("https://jsonplaceholder.typicode.com/comments", timeout=2)
-    engine = create_engine(URL)
+    engine = create_engine(url)
     data = []
     for comment in result.json():
         obj_comments = Comment(
@@ -108,10 +108,10 @@ def endpoint_comments() -> None:
         session.commit()
 
 
-def endpoint_albums() -> None:
+def endpoint_albums(url: str) -> None:
     """Handling albums endpoints"""
     result = rq.get("https://jsonplaceholder.typicode.com/albums", timeout=2)
-    engine = create_engine(URL)
+    engine = create_engine(url)
     data = []
     for album in result.json():
         obj_album = Album(
@@ -126,10 +126,10 @@ def endpoint_albums() -> None:
         session.commit()
 
 
-def endpoint_photo() -> None:
+def endpoint_photo(url: str) -> None:
     """Handling photos endpoints"""
     result = rq.get("https://jsonplaceholder.typicode.com/photos", timeout=2)
-    engine = create_engine(URL)
+    engine = create_engine(url)
     data = []
     for photo in result.json():
         obj_photos = Photo(
@@ -146,10 +146,10 @@ def endpoint_photo() -> None:
         session.commit()
 
 
-def endpoint_todo() -> None:
+def endpoint_todo(url: str) -> None:
     """Handling todos endpoints"""
     result = rq.get("https://jsonplaceholder.typicode.com/todos", timeout=2)
-    engine = create_engine(URL)
+    engine = create_engine(url)
     data = []
     for todo in result.json():
         obj_photos = Todo(
@@ -166,11 +166,11 @@ def endpoint_todo() -> None:
 
 
 if __name__ == '__main__':
-    create_db()
-    create_schema()
-    endpoint_users()
-    endpoint_posts()
-    endpoint_comments()
-    endpoint_albums()
-    endpoint_photo()
-    endpoint_todo()
+    create_db(URL)
+    create_schema(URL)
+    endpoint_users(URL)
+    endpoint_posts(URL)
+    endpoint_comments(URL)
+    endpoint_albums(URL)
+    endpoint_photo(URL)
+    endpoint_todo(URL)
