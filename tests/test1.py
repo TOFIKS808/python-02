@@ -1,5 +1,6 @@
+# pylint: disable=R0801
 """
-     Test bazy danych
+     Test populacji danych do Modelu
 """
 
 import unittest
@@ -10,9 +11,9 @@ import requests
 from src.Model import Base, User, Company, Address, Geo
 
 
-class MyTestCase(unittest.TestCase):
+class ModelPopulateTestCase(unittest.TestCase):
     """
-         Test bazy danych
+         Test populacji danych do Modelu
     """
 
     def setUp(self):
@@ -22,7 +23,7 @@ class MyTestCase(unittest.TestCase):
         self.db_host = getenv('DB_HOST')
         self.db_port = getenv('DB_PORT')
 
-    def test_something(self):
+    def test_model(self):
         """
              Test bazy danych
         """
@@ -63,7 +64,6 @@ class MyTestCase(unittest.TestCase):
             )
             data.append(obj_user)
         with Session(engine) as session:
-            # for z danymi z api
             for obj in data:
                 session.add(obj)
 
@@ -78,7 +78,6 @@ class MyTestCase(unittest.TestCase):
             self.assertEqual("Sincere@april.biz", db_user_1.email)
             self.assertEqual("1-770-736-8031 x56442", db_user_1.phone)
             self.assertEqual("hildegard.org", db_user_1.website)
-            # print(type(result))
 
 
 if __name__ == '__main__':

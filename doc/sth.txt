@@ -1,0 +1,10 @@
+
+            # all
+            # result = session.execute(select(User).order_by(User.id))
+            # for r in result:
+            #     print(r)
+            # single
+
+            # result = session.execute(select(User).where(User.id == 1))
+            # for r in result:
+            #     print(r)

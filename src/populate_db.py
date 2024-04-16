@@ -1,5 +1,5 @@
 """
-
+    Data base populating
 """
 from os import getenv
 import requests as rq
@@ -7,7 +7,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from sqlalchemy_utils import database_exists, drop_database, create_database
 
-from Model import Base, User, Company, Address, Geo
+from Model import Base, User, Company, Address, Geo, Post, Comment, Album, Photo, Todo
 
 db_name = getenv('DB_NAME')
 db_user = getenv('DB_USER')
@@ -34,6 +34,7 @@ def create_schema() -> None:
 
 
 def endpoint_users() -> None:
+    """Handling user endpoints"""
     result = rq.get("https://jsonplaceholder.typicode.com/users", timeout=2)
     engine = create_engine(URL)
     data = []
@@ -68,8 +69,108 @@ def endpoint_users() -> None:
         session.commit()
 
 
+def endpoint_posts() -> None:
+    """Handling posts endpoints"""
+    result = rq.get("https://jsonplaceholder.typicode.com/posts", timeout=2)
+    engine = create_engine(URL)
+    data = []
+    for post in result.json():
+        obj_posts = Post(
+            id=post['id'],
+            user_id=post['userId'],
+            title=post['title'],
+            body=post['body'],
+        )
+        data.append(obj_posts)
+    with Session(engine) as session:
+        for obj in data:
+            session.add(obj)
+        session.commit()
+
+
+def endpoint_comments() -> None:
+    """Handling comments endpoints"""
+    result = rq.get("https://jsonplaceholder.typicode.com/comments", timeout=2)
+    engine = create_engine(URL)
+    data = []
+    for comment in result.json():
+        obj_comments = Comment(
+            id=comment['id'],
+            post_id=comment['postId'],
+            name=comment['name'],
+            email=comment['email'],
+            body=comment['body'],
+        )
+        data.append(obj_comments)
+    with Session(engine) as session:
+        for obj in data:
+            session.add(obj)
+        session.commit()
+
+
+def endpoint_albums() -> None:
+    """Handling albums endpoints"""
+    result = rq.get("https://jsonplaceholder.typicode.com/albums", timeout=2)
+    engine = create_engine(URL)
+    data = []
+    for album in result.json():
+        obj_album = Album(
+            id=album['id'],
+            user_id=album['userId'],
+            title=album['title'],
+        )
+        data.append(obj_album)
+    with Session(engine) as session:
+        for obj in data:
+            session.add(obj)
+        session.commit()
+
+
+def endpoint_photo() -> None:
+    """Handling photos endpoints"""
+    result = rq.get("https://jsonplaceholder.typicode.com/photos", timeout=2)
+    engine = create_engine(URL)
+    data = []
+    for photo in result.json():
+        obj_photos = Photo(
+            id=photo['id'],
+            album_id=photo['albumId'],
+            title=photo['title'],
+            url=photo['url'],
+            thumbnail_url=photo['thumbnailUrl'],
+        )
+        data.append(obj_photos)
+    with Session(engine) as session:
+        for obj in data:
+            session.add(obj)
+        session.commit()
+
+
+def endpoint_todo() -> None:
+    """Handling todos endpoints"""
+    result = rq.get("https://jsonplaceholder.typicode.com/todos", timeout=2)
+    engine = create_engine(URL)
+    data = []
+    for todo in result.json():
+        obj_photos = Todo(
+            id=todo['id'],
+            user_id=todo['userId'],
+            title=todo['title'],
+            completed=todo['completed'],
+        )
+        data.append(obj_photos)
+    with Session(engine) as session:
+        for obj in data:
+            session.add(obj)
+        session.commit()
+
+
 if __name__ == '__main__':
-    """populate db"""
     create_db()
     create_schema()
     endpoint_users()
+    endpoint_posts()
+    endpoint_comments()
+    endpoint_albums()
+    endpoint_photo()
+    endpoint_todo()

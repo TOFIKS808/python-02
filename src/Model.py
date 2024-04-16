@@ -9,7 +9,6 @@ from sqlalchemy.orm import mapped_column
 from sqlalchemy import String, Boolean
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
-from sqlalchemy.orm import DeclarativeBase
 
 
 class Base(DeclarativeBase):
@@ -87,6 +86,7 @@ class Geo(Base):
 
 
 class Post(Base):
+    """ budowa tabeli post """
     __tablename__ = "post"
     id: Mapped[int] = mapped_column(primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
@@ -100,9 +100,11 @@ class Post(Base):
 
 
 class Comment(Base):
+    """ budowa tabeli comment """
     __tablename__ = "comment"
     id: Mapped[int] = mapped_column(primary_key=True)
     post_id: Mapped[int] = mapped_column(ForeignKey("post.id"))
+    name: Mapped[str] = mapped_column(String)
     email: Mapped[str] = mapped_column(String)
     body: Mapped[str] = mapped_column(String)
     post: Mapped["Post"] = relationship(back_populates="comments")
@@ -112,6 +114,7 @@ class Comment(Base):
 
 
 class Album(Base):
+    """ budowa tabeli album """
     __tablename__ = "album"
     id: Mapped[int] = mapped_column(primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
@@ -124,6 +127,7 @@ class Album(Base):
 
 
 class Photo(Base):
+    """ budowa tabeli photo """
     __tablename__ = "photo"
     id: Mapped[int] = mapped_column(primary_key=True)
     album_id: Mapped[int] = mapped_column(ForeignKey("album.id"))
@@ -134,6 +138,7 @@ class Photo(Base):
 
 
 class Todo(Base):
+    """ budowa tabeli todo """
     __tablename__ = "todo"
     id: Mapped[int] = mapped_column(primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
