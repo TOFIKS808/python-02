@@ -2,7 +2,7 @@ services:
   anaconda:
     build:
       context: .
-      dockerfile: ./.docker/Dockerfile
+      dockerfile: .docker/Dockerfile
 
     volumes:
       - ./:/python
