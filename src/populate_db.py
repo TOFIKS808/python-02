@@ -126,7 +126,7 @@ def endpoint_albums(url: str) -> None:
         session.commit()
 
 
-def endpoint_photo(url: str) -> None:
+def endpoint_photos(url: str) -> None:
     """Handling photos endpoints"""
     result = rq.get("https://jsonplaceholder.typicode.com/photos", timeout=2)
     engine = create_engine(url)
@@ -146,7 +146,7 @@ def endpoint_photo(url: str) -> None:
         session.commit()
 
 
-def endpoint_todo(url: str) -> None:
+def endpoint_todos(url: str) -> None:
     """Handling todos endpoints"""
     result = rq.get("https://jsonplaceholder.typicode.com/todos", timeout=2)
     engine = create_engine(url)
@@ -172,5 +172,5 @@ if __name__ == '__main__':
     endpoint_posts(URL)
     endpoint_comments(URL)
     endpoint_albums(URL)
-    endpoint_photo(URL)
-    endpoint_todo(URL)
+    endpoint_photos(URL)
+    endpoint_todos(URL)
