@@ -17,11 +17,11 @@ class ModelPopulateTestCase(unittest.TestCase):
     """
 
     def setUp(self):
-        self.db_name = getenv('DB_NAME_TEST')
-        self.db_user = getenv('DB_USER')
-        self.db_pass = getenv('DB_PASS')
-        self.db_host = getenv('DB_HOST')
-        self.db_port = getenv('DB_PORT')
+        self.db_name = getenv('PG_DB_NAME_TEST')
+        self.db_user = getenv('PG_DB_USER')
+        self.db_pass = getenv('PG_DB_PASS')
+        self.db_host = getenv('PG_DB_HOST')
+        self.db_port = getenv('PG_DB_PORT')
 
     def test_model(self):
         """

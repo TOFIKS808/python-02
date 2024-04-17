@@ -11,10 +11,10 @@ services:
     command:
         /opt/conda/bin/jupyter notebook --notebook-dir=/python/notebooks --ip='0.0.0.0' --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''
     environment:
-      - DB_NAME=${DB_NAME}
-      - DB_NAME_TEST=${DB_NAME_TEST}
-      - DB_PORT=${DB_PORT}
-      - DB_USER=${DB_USER}
-      - DB_PASS=${DB_PASS}
-      - DB_HOST=${DB_HOST}
+      - PG_DB_NAME=${PG_DB_NAME}
+      - PG_DB_NAME_TEST=${PG_DB_NAME_TEST}
+      - PG_DB_PORT=${PG_DB_PORT}
+      - PG_DB_USER=${PG_DB_USER}
+      - PG_DB_PASS=${PG_DB_PASS}
+      - PG_DB_HOST=${PG_DB_HOST}
     tty: true

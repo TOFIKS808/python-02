@@ -7,11 +7,11 @@ import unittest
 from os import getenv
 from tests.test_db_abstract import TestDbAbstractTestCase
 
-db_name = getenv('DB_NAME_TEST')
-db_user = getenv('DB_USER')
-db_pass = getenv('DB_PASS')
-db_host = getenv('DB_HOST')
-db_port = getenv('DB_PORT')
+db_name = getenv('PG_DB_NAME_TEST')
+db_user = getenv('PG_DB_USER')
+db_pass = getenv('PG_DB_PASS')
+db_host = getenv('PG_DB_HOST')
+db_port = getenv('PG_DB_PORT')
 URL = f"postgresql+psycopg2://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}"
 
 
@@ -29,6 +29,7 @@ class PostgresTestCase(TestDbAbstractTestCase):
         self.func_endpoint_albums(URL)
         self.func_endpoint_photos(URL)
         self.func_endpoint_todos(URL)
+
 
 if __name__ == '__main__':
     unittest.main()
