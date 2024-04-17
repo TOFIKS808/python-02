@@ -23,7 +23,6 @@ class ModelPopulateTestCase(unittest.TestCase):
         self.db_host = getenv('DB_HOST')
         self.db_port = getenv('DB_PORT')
 
-    @unittest.skip
     def test_model(self):
         """
              Test bazy danych

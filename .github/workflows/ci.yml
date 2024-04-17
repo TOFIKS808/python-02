@@ -36,4 +36,4 @@ jobs:
         pylint src/ tests/
     - name: Tests
       run: |
-        python -m unittest discover tests
+        python -m unittest discover tests/unit -vvv
