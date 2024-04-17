@@ -19,11 +19,11 @@ class User(Base):
     """ budowa tabeli users """
     __tablename__ = "users"
     id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(String)
-    username: Mapped[str] = mapped_column(String)
-    email: Mapped[str] = mapped_column(String)
-    phone: Mapped[str] = mapped_column(String)
-    website: Mapped[str] = mapped_column(String)
+    name: Mapped[str] = mapped_column((String(1000)))
+    username: Mapped[str] = mapped_column((String(1000)))
+    email: Mapped[str] = mapped_column((String(1000)))
+    phone: Mapped[str] = mapped_column((String(1000)))
+    website: Mapped[str] = mapped_column((String(1000)))
     company: Mapped["Company"] = relationship(back_populates="user", cascade="all, delete-orphan")
     address: Mapped["Address"] = relationship(back_populates="user", cascade="all, delete-orphan")
     posts: Mapped[List["Post"]] = relationship(back_populates="user", cascade="all, delete-orphan")
@@ -46,9 +46,9 @@ class Company(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
     user: Mapped["User"] = relationship(back_populates="company")
-    name: Mapped[str] = mapped_column(String)
-    catch_phrase: Mapped[str] = mapped_column(String)
-    bs: Mapped[str] = mapped_column(String)
+    name: Mapped[str] = mapped_column((String(1000)))
+    catch_phrase: Mapped[str] = mapped_column((String(1000)))
+    bs: Mapped[str] = mapped_column((String(1000)))
 
     def __repr__(self) -> str:
         return (f"Company(id={self.id}, name={self.name!r}, catch_phrase={self.catch_phrase!r}, "
@@ -61,10 +61,10 @@ class Address(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
     user: Mapped["User"] = relationship(back_populates="address")
-    street: Mapped[str] = mapped_column(String)
-    suite: Mapped[str] = mapped_column(String)
-    city: Mapped[str] = mapped_column(String)
-    zipcode: Mapped[str] = mapped_column(String)
+    street: Mapped[str] = mapped_column((String(1000)))
+    suite: Mapped[str] = mapped_column((String(1000)))
+    city: Mapped[str] = mapped_column((String(1000)))
+    zipcode: Mapped[str] = mapped_column((String(1000)))
     geo: Mapped["Geo"] = relationship(back_populates="address", cascade="all, delete-orphan")
 
     def __repr__(self) -> str:
@@ -78,8 +78,8 @@ class Geo(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     address_id: Mapped[int] = mapped_column(ForeignKey("address.id"))
     address: Mapped["Address"] = relationship(back_populates="geo")
-    lat: Mapped[str] = mapped_column(String)
-    long: Mapped[str] = mapped_column(String)
+    lat: Mapped[str] = mapped_column((String(1000)))
+    long: Mapped[str] = mapped_column((String(1000)))
 
     def __repr__(self) -> str:
         return f"Geo(id={self.id!r}, address_id={self.address_id}, lat={self.lat!r}, long={self.long!r})"
@@ -90,8 +90,8 @@ class Post(Base):
     __tablename__ = "post"
     id: Mapped[int] = mapped_column(primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
-    title: Mapped[str] = mapped_column(String)
-    body: Mapped[str] = mapped_column(String)
+    title: Mapped[str] = mapped_column(String(1000))
+    body: Mapped[str] = mapped_column(String(1000))
     user: Mapped["User"] = relationship(back_populates="posts")
     comments: Mapped[List["Comment"]] = relationship(back_populates="post", cascade="all, delete-orphan")
 
@@ -104,9 +104,9 @@ class Comment(Base):
     __tablename__ = "comment"
     id: Mapped[int] = mapped_column(primary_key=True)
     post_id: Mapped[int] = mapped_column(ForeignKey("post.id"))
-    name: Mapped[str] = mapped_column(String)
-    email: Mapped[str] = mapped_column(String)
-    body: Mapped[str] = mapped_column(String)
+    name: Mapped[str] = mapped_column((String(1000)))
+    email: Mapped[str] = mapped_column((String(1000)))
+    body: Mapped[str] = mapped_column((String(1000)))
     post: Mapped["Post"] = relationship(back_populates="comments")
 
     def __repr__(self) -> str:
@@ -118,7 +118,7 @@ class Album(Base):
     __tablename__ = "album"
     id: Mapped[int] = mapped_column(primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
-    title: Mapped[str] = mapped_column(String)
+    title: Mapped[str] = mapped_column((String(1000)))
     user: Mapped["User"] = relationship(back_populates="albums")
     photos: Mapped[List["Photo"]] = relationship(back_populates="album", cascade="all, delete-orphan")
 
@@ -131,10 +131,10 @@ class Photo(Base):
     __tablename__ = "photo"
     id: Mapped[int] = mapped_column(primary_key=True)
     album_id: Mapped[int] = mapped_column(ForeignKey("album.id"))
-    title: Mapped[str] = mapped_column(String)
+    title: Mapped[str] = mapped_column((String(1000)))
     album: Mapped["Album"] = relationship(back_populates="photos")
-    url: Mapped[str] = mapped_column(String)
-    thumbnail_url: Mapped[str] = mapped_column(String)
+    url: Mapped[str] = mapped_column((String(1000)))
+    thumbnail_url: Mapped[str] = mapped_column((String(1000)))
 
 
 class Todo(Base):
@@ -142,6 +142,6 @@ class Todo(Base):
     __tablename__ = "todo"
     id: Mapped[int] = mapped_column(primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
-    title: Mapped[str] = mapped_column(String)
+    title: Mapped[str] = mapped_column((String(1000)))
     completed: Mapped[bool] = mapped_column(Boolean)
     user: Mapped["User"] = relationship(back_populates="todos")

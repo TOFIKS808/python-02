@@ -3,3 +3,4 @@ SQLAlchemy==2.0.29
 psycopg2-binary==2.9.9
 requests==2.31.0
 SQLAlchemy-Utils==0.41.2
+mariadb==1.1.10

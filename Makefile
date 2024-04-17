@@ -20,8 +20,7 @@ test::
 # Docker development
 up::
 	$(MAKE) down || true
-	docker-compose rm -f || true
-	docker-compose up --build -d
+	docker-compose up -d
 PHONY: up
 
 enter::
@@ -31,6 +30,12 @@ enter::
 down::
 	docker-compose down
 .PHONY: down
+
+build::
+	$(MAKE) down || true
+	docker-compose rm -f || true
+	docker-compose up --build -d
+.PHONY: build
 
 d-pip::
 	docker-compose exec anaconda pip install --root-user-action=ignore -r requirements.txt
