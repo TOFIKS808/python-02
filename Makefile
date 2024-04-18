@@ -19,8 +19,6 @@ test::
 
 # Docker development
 up::
-	sudo chmod 777 volumes/data
-	sudo chmod 777 volumes/backup
 	$(MAKE) down || true
 	docker-compose up -d
 PHONY: up
@@ -49,7 +47,7 @@ d-lint::
 .PHONY: d-lint
 
 d-test::
-	docker-compose exec anaconda python -m unittest discover tests
+	docker-compose exec anaconda /bin/bash -c 'source /root/.bashrc && python -m unittest discover tests -vvv'
 .PHONY: d-lint
 
 

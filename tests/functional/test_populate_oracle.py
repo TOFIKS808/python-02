@@ -18,7 +18,7 @@ URL = f'oracle+cx_oracle://{db_user}:{db_pass}@{db_host}:{db_port}/?service_name
 class OracleTestCase(TestDbAbstractTestCase):
     """ Testing class """
     def test_all(self):
-        """ Testing all remade functions in Postgres """
+        """ Testing all remade functions in Oracle """
         # self.func_create_db(URL)
         self.func_create_schema(URL)
         self.func_endpoint_users(URL)

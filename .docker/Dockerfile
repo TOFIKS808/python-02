@@ -40,6 +40,8 @@ RUN set -x && \
         iputils-ping \
         libmariadb-dev \
         build-essential \
+        libaio1 \
+        unzip \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* && \
     UNAME_M="$(uname -m)" && \
@@ -71,6 +73,12 @@ RUN mkdir -p /root/.jupyter
 COPY ./.docker/jupyter_notebook_config.json /root/.jupyter/jupyter_notebook_config.json
 COPY ./.docker/.bashrc /root
 
+RUN curl -k https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-basic-linux.x64-21.13.0.0.0dbru.zip \
+    -o insta.zip && \
+    unzip insta.zip && \
+    mkdir -p /opt/oracle && \
+    mv instantclient_21_13 /opt/oracle && \
+    rm insta.zip
 
 WORKDIR /python
 EXPOSE 8888
