@@ -8,6 +8,7 @@ from tests.test_db_abstract import TestDbAbstractTestCase
 
 class SQLiteTestCase(TestDbAbstractTestCase):
     """Testing class"""
+
     def test_all(self):
         """ Testing all remade functions in SQLite """
         folder = './var'

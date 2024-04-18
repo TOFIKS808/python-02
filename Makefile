@@ -19,6 +19,8 @@ test::
 
 # Docker development
 up::
+	sudo chmod 777 volumes/data
+	sudo chmod 777 volumes/backup
 	$(MAKE) down || true
 	docker-compose up -d
 PHONY: up

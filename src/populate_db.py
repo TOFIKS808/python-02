@@ -25,11 +25,11 @@ def create_db(url: str) -> None:
 
     create_database(engine.url)
 
-
 def create_schema(url: str) -> None:
     """create tables"""
     engine = create_engine(url)
     Base.metadata.drop_all(engine)
+    # exit()
     Base.metadata.create_all(engine)
 
 
@@ -47,16 +47,19 @@ def endpoint_users(url: str) -> None:
             phone=user['phone'],
             website=user['website'],
             company=Company(
+                id=user['id'],
                 name=user["company"]["name"],
                 catch_phrase=user["company"]["catchPhrase"],
                 bs=user["company"]["bs"]
             ),
             address=Address(
+                id=user['id'],
                 street=user["address"]["street"],
                 suite=user["address"]["suite"],
                 city=user["address"]["city"],
                 zipcode=user["address"]["zipcode"],
                 geo=Geo(
+                    id=user['id'],
                     lat=user["address"]["geo"]["lat"],
                     long=user["address"]["geo"]["lng"]
                 )

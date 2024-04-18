@@ -41,7 +41,7 @@ class TestDbAbstractTestCase(unittest.TestCase):
         endpoint_users(url)
         engine = sql.create_engine(url)
         with orm.Session(engine) as session:
-            users = session.execute(sql.select(User)).scalars().all()
+            users = session.execute(sql.select(User).order_by(User.id)).scalars().all()
             self.assertEqual(10, len(users))
             user: User = users[1]
             self.assertIsInstance(user, User)
@@ -62,7 +62,7 @@ class TestDbAbstractTestCase(unittest.TestCase):
         endpoint_posts(url)
         engine = sql.create_engine(url)
         with orm.Session(engine) as session:
-            posts = session.execute(sql.select(Post)).scalars().all()
+            posts = session.execute(sql.select(Post).order_by(Post.id)).scalars().all()
             self.assertEqual(100, len(posts))
             post: Post = posts[1]
             self.assertEqual(1, post.user_id)
@@ -79,7 +79,7 @@ class TestDbAbstractTestCase(unittest.TestCase):
         endpoint_comments(url)
         engine = sql.create_engine(url)
         with orm.Session(engine) as session:
-            comments = session.execute(sql.select(Comment)).scalars().all()
+            comments = session.execute(sql.select(Comment).order_by(Comment.id)).scalars().all()
             self.assertEqual(500, len(comments))
             comment: Comment = comments[1]
             self.assertEqual(1, comment.post_id)
@@ -96,7 +96,7 @@ class TestDbAbstractTestCase(unittest.TestCase):
         endpoint_albums(url)
         engine = sql.create_engine(url)
         with orm.Session(engine) as session:
-            albums = session.execute(sql.select(Album)).scalars().all()
+            albums = session.execute(sql.select(Album).order_by(Album.id)).scalars().all()
             self.assertEqual(100, len(albums))
             album: Album = albums[1]
             self.assertEqual(1, album.user_id)
@@ -109,7 +109,7 @@ class TestDbAbstractTestCase(unittest.TestCase):
         endpoint_photos(url)
         engine = sql.create_engine(url)
         with orm.Session(engine) as session:
-            photos = session.execute(sql.select(Photo)).scalars().all()
+            photos = session.execute(sql.select(Photo).order_by(Photo.id)).scalars().all()
             self.assertEqual(5000, len(photos))
             photo: Photo = photos[1]
             self.assertEqual(1, photo.album_id)
@@ -124,7 +124,7 @@ class TestDbAbstractTestCase(unittest.TestCase):
         endpoint_todos(url)
         engine = sql.create_engine(url)
         with orm.Session(engine) as session:
-            todos = session.execute(sql.select(Todo)).scalars().all()
+            todos = session.execute(sql.select(Todo).order_by(Todo.id)).scalars().all()
             self.assertEqual(200, len(todos))
             todo: Todo = todos[1]
             self.assertEqual(1, todo.user_id)
