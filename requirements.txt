@@ -6,3 +6,4 @@ SQLAlchemy-Utils==0.41.2
 mariadb==1.1.10
 cX_Oracle==8.3.0
 pymssql==2.3.0
+ibm-db-sa==0.4.0
