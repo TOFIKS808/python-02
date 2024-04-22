@@ -1,5 +1,3 @@
-# Basic Python skeleton project
-
 ## Local development with `venv`
 * run `make venv` to create `venv`
 * run `. ./venv/bin/activate` to activate `venv`
@@ -16,3 +14,14 @@
 
 
 https://medium.com/@arthurapp98/using-sqlalchemy-to-create-and-populate-a-postgresql-database-with-excel-data-eb6049d93402
+
+## Description
+
+Program that implements handling the population of the database with API data into multiple systems which are:
+    - Postgres
+    - mariadb
+    - oracle
+    - Ms SQL
+    - IBM DB2
+    - SQLite
+
