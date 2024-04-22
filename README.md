@@ -17,11 +17,11 @@ https://medium.com/@arthurapp98/using-sqlalchemy-to-create-and-populate-a-postgr
 
 ## Description
 
-Program that implements handling the population of the database with API data into multiple systems which are:
-    - Postgres
-    - mariadb
-    - oracle
-    - Ms SQL
-    - IBM DB2
-    - SQLite
+### Program that implements handling the population of the database with API data into multiple systems which are:
+    * Postgres
+    * mariadb
+    * oracle
+    * Ms SQL
+    * IBM DB2
+    * SQLite
 
