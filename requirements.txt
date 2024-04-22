@@ -1,8 +1,8 @@
 SQLAlchemy==2.0.29
-#psycopg2>=2.9.9
-psycopg2-binary==2.9.9
-requests==2.31.0
 SQLAlchemy-Utils==0.41.2
+requests==2.31.0
+# db
+psycopg2-binary==2.9.9
 mariadb==1.1.10
 cX_Oracle==8.3.0
 pymssql==2.3.0
